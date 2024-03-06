@@ -32,19 +32,17 @@ else ()
   set(PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR})
 endif ()
 
-if (NOT EMSCRIPTEN)
-  ExternalProject_Add(
-    SDL2
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG release-2.28.4
-    PREFIX ${PREFIX_DIR}
-    BINARY_DIR ${PREFIX_DIR}/src/SDL2-build/${build_type_dir}
-    CMAKE_COMMAND ${THIRD_PARTY_CMAKE_COMMAND}
-    CMAKE_ARGS ${build_type_arg} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-    BUILD_COMMAND cmake --build <BINARY_DIR> ${build_config_arg}
-    INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
-                    ${build_config_arg})
-endif ()
+ExternalProject_Add(
+  SDL2
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+  GIT_TAG release-2.28.4
+  PREFIX ${PREFIX_DIR}
+  BINARY_DIR ${PREFIX_DIR}/src/SDL2-build/${build_type_dir}
+  CMAKE_COMMAND ${THIRD_PARTY_CMAKE_COMMAND}
+  CMAKE_ARGS ${build_type_arg} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+  BUILD_COMMAND cmake --build <BINARY_DIR> ${build_config_arg}
+  INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
+                  ${build_config_arg})
 
 ExternalProject_Add(
   bgfx
@@ -75,3 +73,16 @@ ExternalProject_Add(
   BUILD_COMMAND cmake --build <BINARY_DIR> ${build_config_arg}
   INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
                   ${build_config_arg})
+
+ExternalProject_Add(
+  SDL2_Image
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+  GIT_TAG release-2.8.2
+  PREFIX ${PREFIX_DIR}
+  BINARY_DIR ${PREFIX_DIR}/src/SDL2_Image-build/${build_type_dir}
+  CMAKE_COMMAND ${THIRD_PARTY_CMAKE_COMMAND}
+  CMAKE_ARGS ${build_type_arg} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+  BUILD_COMMAND cmake --build <BINARY_DIR> ${build_config_arg}
+  INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
+  ${build_config_arg}
+)
