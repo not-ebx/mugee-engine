@@ -5,17 +5,18 @@
 #ifndef SDL_BGFX_IMGUI_STARTER_RENDER_BATCH_H
 #define SDL_BGFX_IMGUI_STARTER_RENDER_BATCH_H
 
-#include "../structs/cube.h"
+#include "abstract/renderable.h"
 #include <bgfx/bgfx.h>
 #include <vector>
+
 namespace Rendering {
     struct RenderBatch {
         bgfx::VertexBufferHandle vertexBuffer;
         bgfx::IndexBufferHandle indexBuffer;
         bgfx::TextureHandle texture;
-        std::vector<Graphics::Cube*> cubes;
+        std::vector<Renderable> renderableQueue;
         uint64_t renderState;
     };
-}
+}// namespace Rendering
 
-#endif // SDL_BGFX_IMGUI_STARTER_RENDER_BATCH_H
+#endif// SDL_BGFX_IMGUI_STARTER_RENDER_BATCH_H

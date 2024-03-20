@@ -1,15 +1,12 @@
 #include <bgfx/bgfx.h>
 
 #include <SDL.h>
-#include <SDL_syswm.h>
 
 #include "../bgfx-imgui/imgui_impl_bgfx.h"
-#include "../imgui.h"
 #include "../sdl-imgui/imgui_impl_sdl2.h"
 #include "game/game_context.h"
-#include "graphics/rendering/shaders.h"
-#include "graphics/structs/cube.h"
-#include "graphics/texture.h"
+#include "game/objects/object_factory.h"
+#include "world/spatial_partitioning/voxel_grid.h"
 
 
 void main_loop() {
@@ -31,33 +28,27 @@ void main_loop() {
     ImGui::Render();
     ImGui_Implbgfx_RenderDrawLists(ImGui::GetDrawData());
 
+
     context->getPlayer()->update();
 
-    float i = 0;
-    for (Graphics::Cube *cube: context->cubeQueue) {
-        bgfx::setVertexBuffer(0, cube->getVbh());
-        bgfx::setIndexBuffer(cube->getIbh());
-
-        cube->render();
-        cube->setPosition({i * 2, 0, 0});
-
-        bgfx::submit(0, context->getProgram());
-        i++;
-    }
-
+    auto voxelGrid = new World::VoxelGrid(context->cubeQueue);
+    context->getLoadedTexture(0)->bindTexture();
+    voxelGrid->render();
     bgfx::frame();
 }
 
 int main(int argc, char **argv) {
     Game::GameContext *game = Game::GameContext::get_instance();
+    // Create a very simple flat ground for testing.
+    for (float i = 0; i < 10; i++) {
+        for (float j = 0; j < 10; j++) {
+            auto newcube = ObjectFactory::createObject(BlockType::DIRT);
+            newcube->setPosition({j * 2, 0, i * 2});
+            game->cubeQueue.push_back(newcube);
+        }
+    }
 
-    game->cubeQueue = {
-            new Graphics::Cube(new Texture("./assets/texture_test.png")),
-            new Graphics::Cube(new Texture("./assets/texture_test.png")),
-            new Graphics::Cube(new Texture("./assets/texture_test.png")),
-            new Graphics::Cube(new Texture("./assets/texture_test.png")),
-    };
-
+    // Load game textures
     while (!game->isQuit()) {
         main_loop();
     }

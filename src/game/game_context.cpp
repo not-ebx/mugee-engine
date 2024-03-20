@@ -73,7 +73,6 @@ namespace Game {
 
 
         ImGui_Implbgfx_Init(255);
-        // TODO: Fix this macro!!
 #if BX_PLATFORM_WINDOWS
         ImGui_ImplSDL2_InitForD3D(window);
 #elif BX_PLATFORM_OSX
@@ -99,15 +98,19 @@ namespace Game {
             return;
         }
 
+        // Load Textures
+        loadedTextures = {
+                std::make_shared<Texture>("./assets/test_textures.png")};
+
         vsh = Rendering::create_shader(vshader, "vshader");
         fsh = Rendering::create_shader(fshader, "fshader");
         program = bgfx::createProgram(vsh, fsh, true);
     }
     GameContext *GameContext::get_instance() {
-        if (GameContext::instance == nullptr) {
-            GameContext::instance = new GameContext();
+        if (instance == nullptr) {
+            instance = new GameContext();
         }
-        return GameContext::instance;
+        return instance;
     }
     GameContext::~GameContext() {
 
@@ -122,6 +125,24 @@ namespace Game {
         SDL_DestroyWindow(window);
         SDL_Quit();
     }
+
+    Rendering::RenderableObject *GameContext::getRenderableObject(int id) {
+        if (id >= loadedTextures.size()) {
+            return nullptr;
+        }
+        // Return with a renderable object with the texture set.
+        return nullptr;
+    }
+
+    Texture *GameContext::getLoadedTexture(int i) {
+        if (i >= loadedTextures.size()) {
+            return nullptr;
+        }
+        return loadedTextures[i].get();
+    }
+
+
+    // === Getters and Setters === (simple ones)
 
     SDL_Window *GameContext::getWindow() const {
         return window;

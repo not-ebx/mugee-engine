@@ -1,0 +1,14 @@
+
+#ifndef SDL_BGFX_IMGUI_STARTER_BLOCK_DATA_H
+#define SDL_BGFX_IMGUI_STARTER_BLOCK_DATA_H
+
+enum class BlockType {
+    NOTHING,
+    DIRT,
+    BRICKS,
+    COBBLESTONE,
+    GRASS,
+    WOOD
+};
+
+#endif//SDL_BGFX_IMGUI_STARTER_BLOCK_DATA_H

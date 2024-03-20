@@ -5,7 +5,8 @@
 #ifndef SDL_BGFX_IMGUI_STARTER_GAME_CONTEXT_H
 #define SDL_BGFX_IMGUI_STARTER_GAME_CONTEXT_H
 
-#include "../graphics/structs/cube.h"
+#include "../graphics/block_3_d.h"
+#include "../graphics/rendering/abstract/renderable_object.h"
 #include "player.h"
 #include "structs/camera.h"
 #include <SDL.h>
@@ -25,6 +26,7 @@ namespace Game {
         int height = 0;
         bool quit = false;
         Player *player;
+        std::vector<std::shared_ptr<Texture>> loadedTextures;
 
         GameContext();
 
@@ -34,6 +36,8 @@ namespace Game {
         static GameContext *get_instance();
         ~GameContext();
         SDL_Window *getWindow() const;
+        Texture *getLoadedTexture(int i);
+        Rendering::RenderableObject *getRenderableObject(int id);
         void setWindow(SDL_Window *window);
         const bgfx::ProgramHandle &getProgram() const;
         void setProgram(const bgfx::ProgramHandle &program);
@@ -51,7 +55,7 @@ namespace Game {
         Player *getPlayer();
 
         // TEMP STUFF
-        std::vector<Graphics::Cube *> cubeQueue;
+        std::vector<Block3D *> cubeQueue;
     };
 
 }// namespace Game
