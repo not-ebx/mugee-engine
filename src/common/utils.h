@@ -4,13 +4,13 @@
 
 #ifndef UTILS_H
 #define UTILS_H
-#include "../graphics/block_3_d.h"
 
 #include <bimg/bimg.h>
+#include <string>
 
-namespace Common {
+namespace common {
 
-    bimg::ImageContainer *readImage(const std::string &filePath);
-}// namespace Common
+bimg::ImageContainer* ReadImage(const std::string& filePath);
+}  // namespace common
 
-#endif//UTILS_H
+#endif  //UTILS_H

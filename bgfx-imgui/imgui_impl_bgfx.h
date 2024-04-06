@@ -10,11 +10,16 @@
 // examples/README.txt and documentation at the top of imgui.cpp.
 // https://github.com/ocornut/imgui
 
+#ifndef IMGUI_IMPL_BGFX
+#define IMGUI_IMPL_BGFX
+
 void ImGui_Implbgfx_Init(int view);
 void ImGui_Implbgfx_Shutdown();
 void ImGui_Implbgfx_NewFrame();
-void ImGui_Implbgfx_RenderDrawLists(struct ImDrawData* draw_data);
+void ImGui_Implbgfx_RenderDrawLists(struct ImDrawData *draw_data);
 
 // Use if you want to reset your rendering device without losing ImGui state.
 void ImGui_Implbgfx_InvalidateDeviceObjects();
 bool ImGui_Implbgfx_CreateDeviceObjects();
+
+#endif

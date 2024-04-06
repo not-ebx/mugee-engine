@@ -86,3 +86,17 @@ ExternalProject_Add(
         INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
         ${build_config_arg}
 )
+
+ExternalProject_Add(
+        OctoMap
+        GIT_REPOSITORY https://github.com/OctoMap/octomap.git
+        GIT_TAG v1.9.5
+        PREFIX ${PREFIX_DIR}
+        SOURCE_DIR ${PREFIX_DIR}/src/OctoMap          # Adding SOURCE_DIR
+        BINARY_DIR ${PREFIX_DIR}/src/OctoMap-build    # Removed /${build_type_dir}
+        CMAKE_COMMAND ${THIRD_PARTY_CMAKE_COMMAND}
+        CMAKE_ARGS ${build_type_arg} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DBUILD_OCTOVIS_SUBPROJECT=OFF -DBUILD_DYNAMICETD3D_SUBPROJECT=OFF
+        BUILD_COMMAND cmake --build <BINARY_DIR> ${build_config_arg}
+        INSTALL_COMMAND cmake --build <BINARY_DIR> --target install
+        ${build_config_arg}
+)

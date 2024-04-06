@@ -5,11 +5,11 @@
 #ifndef SDL_BGFX_IMGUI_STARTER_TEXTURE_REGION_H
 #define SDL_BGFX_IMGUI_STARTER_TEXTURE_REGION_H
 
-namespace Graphics {
-    struct TextureRegion {
-        float u0, v0;// Top-left UV coordinates
-        float u1, v1;// Bottom-right UV coordinates
-    };
-}// namespace Graphics
+namespace graphics {
+struct TextureRegion {
+  float u0, v0;  // Top-left UV coordinates
+  float u1, v1;  // Bottom-right UV coordinates
+};
+}  // namespace graphics
 
-#endif//SDL_BGFX_IMGUI_STARTER_TEXTURE_REGION_H
+#endif  //SDL_BGFX_IMGUI_STARTER_TEXTURE_REGION_H

@@ -1,23 +1,28 @@
 //
-// Created by Lucas Agullo on 19-03-24.
+// Created by Lucas Agullo on 05-04-24.
 //
 
-#ifndef VOXEL_GRID_H
-#define VOXEL_GRID_H
-#include "../../game/objects/block_3d.h"
+#ifndef FUNNYGEMU_SRC_WORLD_SPATIAL_PARTITIONING_VOXEL_GRID_H_
+#define FUNNYGEMU_SRC_WORLD_SPATIAL_PARTITIONING_VOXEL_GRID_H_
 
-namespace World {
+#include "../../graphics/objects/block_3_d.h"
 
-    class VoxelGrid {
-    private:
-        //Block3D *grid[32][32][32] = {};
-        std::vector<Block3D *> grid;
+namespace game {
+class GameStateManager;
+}
 
-    public:
-        explicit VoxelGrid(const std::vector<Block3D *> &blocks);
-        void render();
-    };
+namespace world {
 
-}// namespace World
+class VoxelGrid {
+ private:
+  //Block3D *grid[32][32][32] = {};
+  std::vector<graphics::Block3D*> grid;
 
-#endif//VOXEL_GRID_H
+ public:
+  explicit VoxelGrid(const std::vector<graphics::Block3D*>& blocks);
+  void Render(game::GameStateManager* ctx);
+};
+
+}  // namespace world
+
+#endif  //FUNNYGEMU_SRC_WORLD_SPATIAL_PARTITIONING_VOXEL_GRID_H_

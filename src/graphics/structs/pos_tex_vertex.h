@@ -7,19 +7,18 @@
 #ifndef SDL_BGFX_IMGUI_STARTER_POS_TEX_VERTEX_H
 #define SDL_BGFX_IMGUI_STARTER_POS_TEX_VERTEX_H
 
-namespace Graphics{
-    struct PosTexVertex
-    {
-        float x, y, z; // Position
-        uint32_t rgba; // Color number
-        float u, v;    // Texture coordinates
+namespace graphics {
+struct PosTexVertex {
+  float x, y, z;  // Position
+  uint32_t rgba;  // Color number
+  float u, v;     // Texture coordinates
 
-        static bgfx::VertexLayout ms_layout;
-        static void init();
-    };
+  static bgfx::VertexLayout ms_layout;
+  static void init();
+};
 
-    void create_vertex(PosTexVertex* vertex, float x, float y, float z, float u, float v);
-}
+void create_vertex(PosTexVertex* vertex, float x, float y, float z, float u,
+                   float v);
+}  // namespace graphics
 
-
-#endif // SDL_BGFX_IMGUI_STARTER_POS_TEX_VERTEX_H
+#endif  // SDL_BGFX_IMGUI_STARTER_POS_TEX_VERTEX_H
